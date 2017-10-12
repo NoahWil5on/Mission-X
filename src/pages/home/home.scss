@@ -1,0 +1,66 @@
+.ios, .md{
+    page-home {
+        ion-content{
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .shader{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: .5;
+            background-color: #fff;
+        }
+        .scroll-content{
+            margin: 0 !important;
+            padding: 0 !important;
+            background-image: url(../assets/images/beach.jpg);
+            background-size: cover;
+            height: 100%;
+        }
+        ion-grid{
+            height:  100%;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            .flex{
+                flex: 1;
+                ion-col{
+                    height: 175px;
+                    align-items: center;
+                    text-align: center;
+                    ion-card{
+                        margin-left: auto;
+                        margin-right: auto;
+                        background-color: rgba(0,0,0,.7);
+                        display: table;
+                        height: 80% !important;
+                        max-width: 800px;
+                        div{
+                            height: 100%;
+                            vertical-align: middle;
+                            text-align: center;
+                            display: table-cell;
+                            h1{
+                                color: white;
+                                font-size: 24pt;
+                            }
+                        }
+                    }
+                    .title-main{
+                        display: table;
+                        height: 100%;
+                        width: 100%;
+                        h1{
+                            display: table-cell;
+                            vertical-align: middle;
+                            text-align: center;
+                            color: black;
+                            font-size: 24pt;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

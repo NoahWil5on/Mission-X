@@ -1,0 +1,22 @@
+.ios, .md{
+    page-reports {
+        h1{
+            border-width: 2px;
+            border-radius: 4px;
+            border-style: solid;
+            padding: 3px;
+        }
+        .flex-row{
+            padding-bottom: 10px;
+            ion-col{
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                ion-item{
+                    padding: 0;
+                    flex-grow: 2;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,84 @@
+<div>
+    <ion-card class="text-area">
+        <ion-item>
+            <ion-label floating class="green-text" [class.red-text]="data.description.trim().length < 1">{{translate.text.editPost.description}}</ion-label>
+            <ion-input type="text" maxlength="240" [(ngModel)]="data.description" autocorrect="on"></ion-input>
+        </ion-item>
+    </ion-card>
+    <ion-card>
+        <ion-grid class="color-grid">
+            <ion-row>
+                <ion-col text-center *ngFor="let color of colors">
+                    <div class="select" [class.select-border]="color.value == data.type" (click)="data.type = color.value">
+                        <div class="color-holder" [style.background-color]="color.color" [style.border-color]="color.border">
+                        </div>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <ion-card>
+        <ion-item>
+            <ion-label>{{translate.text.editPost.status}}</ion-label>
+            <ion-select [(ngModel)]="data.status" (click)="statusClick()">
+                <ion-option value="To Do">{{translate.text.other.todo}}</ion-option>
+                <ion-option value="Complete">{{translate.text.other.complete}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-card>
+    <ion-grid>
+        <!-- own addage -->
+        <ion-row class="check-input" *ngFor="let check of data.checks">
+            <ion-col col-auto no-padding>
+                <div class="remove" *ngIf="data.checks.length > 1">
+                    <div class="image-holder" (click)="data.checks.splice(data.checks.indexOf(check),1)">
+                        <ion-icon name="remove"></ion-icon>
+                    </div>
+                </div>
+            </ion-col>
+            <ion-col no-padding>
+                <ion-input type="text" maxlength="40" [(ngModel)]="check.text"></ion-input>
+            </ion-col>
+            <ion-col class="num-holder" col-auto>
+                <ion-input type="number" min="0" max="999" step="1" [(ngModel)]="check.amount" (ngModelChange)="check.amount = convertToNumber($event)"></ion-input>
+            </ion-col>
+        </ion-row>
+
+        <!--Add/Sub row-->
+        <ion-row class="add-row">
+            <ion-col no-padding text-center>
+                <button ion-button [disabled]="data.checks[data.checks.length-1].text.length < 1" (click)="data.checks.push({text: '', state: false, amount: 0})"
+                    class="add">
+                    <ion-icon name="add"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col col-auto no-padding class="left-padding">
+                <div class="number">
+                    <div class="changer" (click)="addAll()">
+                        +
+                    </div>
+                    <div class="changer" (click)="subAll()">
+                        -
+                    </div>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <div text-center padding-top>
+        <ion-grid>
+            <ion-row>
+                <!-- <ion-col>
+                    <button ion-button color="secondary" (click)="submit()" style="padding: 0 10px">
+                        {{translate.text.editPost.submit}}
+                    </button>
+                </ion-col> -->
+                <ion-col>
+                    <button ion-button color="danger" (click)="delete()" block style="padding: 0 10px">
+                        {{translate.text.infoWindow.delete}}
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+    <p class="error">{{error}}</p>
+</div>

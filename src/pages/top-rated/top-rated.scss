@@ -1,0 +1,18 @@
+.ios,.md{
+    page-top-rated {
+        ion-content{
+            background-color: #eee;
+        }
+        ion-list{
+            background-color: #fff;
+        }
+        ion-thumbnail{
+            .avatar{
+                width: 56px;
+                height: 56px;
+                background-size: cover;
+                background-position: center center;
+            }
+        }
+    }
+}

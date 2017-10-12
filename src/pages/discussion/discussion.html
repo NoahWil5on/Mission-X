@@ -1,0 +1,50 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-grid class="ionic-title">
+            <ion-row>
+                <ion-col text-left>
+                </ion-col>
+                <ion-col col-auto class="title">
+                    {{translate.text.discussion.discussion}}
+                </ion-col>
+                <ion-col text-right>
+                    <ion-buttons end>
+                        <button ion-button clear style="color: white;" (click)="dismiss()">X</button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding-bottom>
+    <div class="messages">
+        <div *ngFor="let message of messages">
+            <div class="message">
+                <p [class.own]="checkUid(message.id)" [class.other]="!checkUid(message.id)">{{message.message}}</p>
+            </div>
+            <div>
+                <p class="name" *ngIf="!checkUid(message.id)">{{message.name}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="chat">
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <div>
+                        <textarea #msg rows="1" (keyup)="resize()" [(ngModel)]="myText" placeholder="Aa" (click)="textClick()"></textarea>
+                    </div>
+                </ion-col>
+                <ion-col text-center col-auto>
+                    <button ion-button clear icon-only (click)="submit()">
+                        <ion-icon name="send"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

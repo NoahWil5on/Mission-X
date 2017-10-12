@@ -1,0 +1,97 @@
+<ion-header>
+    <ion-navbar>
+        <ion-grid class="ionic-title">
+            <ion-row>
+                <ion-col text-left>
+                    <ion-buttons start *ngIf="checkProfile() && !navCtrl.canGoBack()">
+                        <button ion-button clear item-start (click)="openMenu()" class='nav-burg'>
+                            <img class="nav-burg" src="assets/hamburger.png" alt="nav"/>
+                        </button>
+                    </ion-buttons>
+                </ion-col>
+                <ion-col col-auto class="title" *ngIf="checkProfile()">
+                    {{translate.text.profile.profile}}
+                </ion-col>
+                <ion-col col-auto class="title" *ngIf="!checkProfile()">
+                    {{user.name}}
+                </ion-col>
+                <ion-col text-right>
+                    <ion-buttons end *ngIf="checkProfile()">
+                        <button ion-button clear item-end class='nav-edit' (click)="openEdit()">
+                            <img class="nav-edit" src="assets/images/buttons/edit.png" alt="nav"/>
+                        </button>
+                    </ion-buttons>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div text-center class="image-div" *ngIf="user.url" [style.background-image]="'url(' + user.url + ')'" (click)="openEdit()">
+        <!-- <img  width="100" alt="Profile Pic" #thisImage (click)="presentImage(thisImage)"/> -->
+    </div>
+    <div text-center class="image-div" *ngIf="!user.url" (click)="openEdit()">
+    </div>
+    <div text-center>
+        <h2>
+            {{user.name}}
+        </h2>
+    </div>
+    <ion-card no-padding>
+        <ion-grid *ngIf="rating != {}" class="stat-div">
+            <ion-row>
+                <ion-col text-center>
+                    <h2>{{rating.posts}}</h2>
+                    <p>{{translate.text.profile.posts}}</p>
+                </ion-col>
+                <!-- <ion-col text-center>
+                    <h2>{{rating.resolves}}</h2>
+                    <p>{{translate.text.profile.resolves}}</p>
+                </ion-col> -->
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+
+        <!-- <ion-row>
+            <ion-col>
+                <p>{{translate.text.profile.post}}{{user.posts}}</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <p>{{translate.text.profile.last}}{{user.lastActive}}</p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <p>{{translate.text.profile.first}}{{user.firstActive}}</p>
+            </ion-col>
+        </ion-row> -->
+    <div *ngIf="reports.length > 0" padding-top>
+        <h2 text-left *ngIf="checkProfile()">{{translate.text.profile.reports}}</h2>
+        <h2 text-left *ngIf="!checkProfile()">{{theReports}}</h2>
+        <ion-card *ngFor="let report of reports">
+            <ion-card-header text-wrap>
+                    <h1 [style.border-color]="report.type">{{report.description}}</h1>   
+            </ion-card-header>
+            <ion-card-content>
+                <ion-grid>
+                    <ion-row class='flex-row'>
+                        <ion-col col-6>
+                            <ion-item>
+                                <p text-wrap><b>{{translate.text.profile.status}}</b>{{report.status}}</p>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6>
+                            <img [src]='report.url' #thisImage (click)="presentImage(thisImage)" alt="Image of Report" *ngIf="report.url"/>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+            <div padding>
+                <button block ion-button color="primary" (click)="showOnMap(report.lat,report.lng)">{{translate.text.profile.map}}</button>
+            </div>
+        </ion-card>
+    </div>
+</ion-content>

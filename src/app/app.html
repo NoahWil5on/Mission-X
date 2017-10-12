@@ -1,0 +1,105 @@
+<ion-menu side="left" type="push" [content]="mycontent" (ionOpen)="openMenu()">
+    <ion-content>
+        <header text-center>
+            <div class="menu-shader">
+
+            </div>
+            <div class="div-holder" *ngIf="checkLogin()">
+                <button ion-button style="height: 100%" clear (click)="profile()">
+                    <div *ngIf="imgSrc">
+                        <div text-center class="image-div" [style.background-image]="'url(' + imgSrc + ')'"></div>
+                        <h2 style="color: white">{{name}}</h2>
+                    </div>
+                    <div *ngIf="!imgSrc">
+                        <div text-center class="image-div"></div>
+                        <h2 style="color: white">{{name}}</h2>
+                    </div>
+                </button>
+            </div>
+            <div class="div-holder" *ngIf="!checkLogin()">
+                <button ion-button style="height: 100%" clear (click)="register()">
+                    <div>
+                        <img src="assets/profile.png" alt="Profile Image" />
+                        <h2 style="color: black">{{translate.text.menu.user}}</h2>
+                    </div>
+                </button>
+            </div>
+        </header>
+        <div class="bottom-shade">
+        </div>
+        <div class="background">
+            <button class="menu-button" (click)="map()" [class.nav-item]="checkPage('map')">
+                {{translate.text.menu.map}}
+            </button>
+        </div>
+        <!-- <div class="background">
+            <button class="menu-button" (click)="notifications()" [class.nav-item]="checkPage('notifications')">
+                Notifications
+            </button>
+            <div class="notification" *ngIf="notificationCount != 0">
+                <p>{{notificationCount}}</p>
+            </div>
+        </div> -->
+        <div class="background">
+            <button class="menu-button" (click)="reports()" [class.nav-item]="checkPage('reports')">
+                {{translate.text.menu.reports}}
+            </button>
+        </div>
+        <!-- <div class="background">
+            <button class="menu-button" (click)="topRated()" [class.nav-item]="checkPage('top')">
+                {{translate.text.menu.rankings}}
+            </button>
+        </div> -->
+        <div class="background">
+            <button class="menu-button" (click)="settings()" [class.nav-item]="checkPage('settings')">
+                {{translate.text.menu.settings}}
+            </button>
+        </div>
+        <div class="background">
+            <button class="menu-button" (click)="logout()">
+                {{translate.text.menu.logout}}
+            </button>
+        </div>
+        <ion-grid class="hide-symbols" [class.show-symbols]="share">
+            <ion-row *ngIf="!userInfo.isApp">
+                <ion-col text-center>
+                    <a href="https://twitter.com/home?status=mzap.org">
+                        <ion-icon name="logo-twitter" style="color: #00aced; font-size: 24pt"></ion-icon>
+                    </a>
+                </ion-col>
+                <ion-col text-center>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u=mzap.org">
+                        <ion-icon name="logo-facebook" style="color: #3b5998; font-size: 24pt"></ion-icon>
+                    </a>
+                </ion-col>
+                <ion-col text-center>
+                    <a href="whatsapp://send" data-href="mzap.org">
+                        <ion-icon name="logo-whatsapp" style="color: #34af23; font-size: 24pt"></ion-icon>
+                    </a>
+                </ion-col>
+            </ion-row>
+            <!-- <ion-row *ngIf="userInfo.isApp">
+                <ion-col text-center>
+                    <button ion-button icon-only clear (click)='shareTwitter()'>
+                        <ion-icon name="logo-twitter" style="color: #00aced; font-size: 24pt"></ion-icon>
+                    </button>
+                </ion-col>
+                <ion-col text-center>
+                    <button ion-button icon-only clear (click)='shareFacebook()'>
+                        <ion-icon name="logo-facebook" style="color: #3b5998; font-size: 24pt"></ion-icon>
+                    </button>
+                </ion-col>
+                <ion-col text-center>
+                    <button ion-button icon-only clear (click)='shareWhatsapp()'>
+                        <ion-icon name="logo-whatsapp" style="color: #34af23; font-size: 24pt"></ion-icon>
+                    </button>
+                </ion-col>
+            </ion-row> -->
+        </ion-grid>
+        <!-- <button ion-button (click)="tutorial()" class="tutorial">Tutorial</button>
+        <button ion-button (click)="share = !share" [class.menu-sharing]="share" class="menu-share">{{translate.text.menu.share}}</button> -->
+        <!-- <button ion-button (click)="call()">Call Mom</button> -->
+    </ion-content>
+</ion-menu>
+
+<ion-nav #mycontent [root]="rootPage"></ion-nav>

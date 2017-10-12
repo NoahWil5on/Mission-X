@@ -1,0 +1,52 @@
+<ion-content padding>
+    <h3 text-center style="color: #3fbc05; margin-top: 50px;" padding-bottom>{{translate.text.confirmation.success}}</h3>
+    <ion-card padding>
+        <h2>{{translate.text.confirmation.report}}</h2>
+        <ion-item text-wrap class="report-item">
+            <h4>{{translate.text.confirmation.type}}</h4>
+            <p>{{type}}</p>
+        </ion-item>
+        <ion-item text-wrap class="report-item">
+            <h4>{{translate.text.confirmation.description}}</h4>
+            <p>{{description}}</p>
+        </ion-item>
+        <ion-item text-wrap class="report-item">
+            <h4 *ngIf="showName()">{{translate.text.confirmation.viewable}}</h4>
+            <h4 *ngIf="!showName()">{{translate.text.confirmation.notViewable}}</h4>
+        </ion-item>
+        <ion-item text-wrap class="report-item" *ngIf="picture">
+            <h4>{{translate.text.confirmation.pic}}</h4>
+            <img [src]="picture" alt="Your Photo" #thisImage (click)="presentImage(thisImage)"/>
+        </ion-item>
+    </ion-card>
+    <div text-center>
+        <button ion-button (click)="dismiss()">{{translate.text.confirmation.map}}</button>
+    </div>
+    <h2 style="color: #3fbc05" >{{translate.text.confirmation.share}}</h2>
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center>
+                <button ion-button icon-only clear (click)='shareTwitter()'>
+                    <ion-icon name="logo-twitter" style="color: #00aced; font-size: 24pt"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col text-center>
+                <button ion-button icon-only clear (click)='shareFacebook()'>
+                    <ion-icon name="logo-facebook" style="color: #3b5998; font-size: 24pt"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col text-center>
+                <button ion-button icon-only clear (click)='shareWhatsapp()'>
+                    <ion-icon name="logo-whatsapp" style="color: #34af23; font-size: 24pt"></ion-icon>
+                </button>
+            </ion-col>
+            <!--
+            <ion-col text-center>
+                <button ion-button icon-only clear (click)='shareSMS()'>
+                    <ion-icon name="text" style="color: #34af23; font-size: 24pt"></ion-icon>
+                </button>
+            </ion-col>
+-->
+        </ion-row>
+    </ion-grid>
+</ion-content>

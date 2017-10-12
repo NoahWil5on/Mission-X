@@ -1,0 +1,56 @@
+<div id="shader" (click)="closeOut()"></div>
+
+<!-- info view -->
+<div class="full" style="pointer-events: none">
+  <div class="section" [class.main]="checkState('comment') || checkState('info')" [class.resolve]="!userInfo.isMobile">
+    <button class="edit show" ion-button clear (click)="state = 'edit'; edit=true" [class.hidden]="checkState('comment')">
+      <img src="assets/images/buttons/edit_button.png" width="40"/>
+    </button>
+    <ion-grid class="check-button">
+      <ion-row>
+        <ion-col text-center>
+          <button class="show" ion-button clear (click)="closeOut()" [class.hidden]="checkState('comment')">
+            <img src="assets/images/buttons/ex.png"/>
+          </button>
+        </ion-col>
+        <ion-col text-center>
+          <button class="show chat-button" ion-button clear (click)="mapPage.comment = true;" [class.hidden]="checkState('comment')">
+            <img src="assets/images/buttons/chat.png"/>
+          </button>
+        </ion-col>
+        <ion-col text-center>
+            <button class="show" ion-button clear (click)="updateChecks()" [class.hidden]="checkState('comment')">
+              <img src="assets/images/buttons/check.png"/>
+            </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div style="height: 100%; width: 100%; overflow: hidden; position: relative;">
+      <info-view class="page"></info-view>
+    </div>
+  </div>
+
+  <!-- edit view -->
+  <div class="full" class="section" [class.main]="checkState('edit') && edit">
+      <ion-grid class="check-button" [class.no-click]="!checkState('edit')">
+        <ion-row>
+          <ion-col text-center>
+            <button class="show" ion-button clear (click)="state = 'info'; edit = false;" [class.hidden]="!checkState('edit')">
+              <img src="assets/images/buttons/ex.png"/>
+            </button>
+          </ion-col>
+          <ion-col text-center class="show">
+              <button class="show" ion-button clear (click)="editComponent.submit()">
+                <img src="assets/images/buttons/check.png"/>
+              </button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <div style="height: 100%; width: 100%; overflow: hidden; position: relative;">
+        <div class="page" style="overflow: scroll">
+          <edit-view></edit-view>
+        </div>
+      </div>
+    </div>
+</div>
