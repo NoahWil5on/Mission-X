@@ -29,7 +29,8 @@ export class TranslatorProvider {
             title1: "Here you can specify what and how many items you need.",
             title2: "Here you can add additional details and give the post a color.",
             sub1: "Don't see something on the list? You can enter other items at the bottom. Click the plus/minus buttons on the bottom right to change all the amounts of needed items.",
-            item: "Item Name"
+            item: "Item Name",
+            success: "Submitted Successfully!"
         },
         confirmation: {
             success: "Successfully Submitted!",
@@ -192,7 +193,9 @@ export class TranslatorProvider {
             openAlb: "Open Album",
             submit: "Submit",
             show: "Show Username",
-            error: "Report must contain a description"
+            error: "Report must contain a description",
+            submitted: "Submitted Successfully!",
+            success: "Deleted Successfuly!"
         },
         home: {
             view: "View Map",
@@ -283,7 +286,8 @@ export class TranslatorProvider {
             title1: "Aquí puede especificar qué y cuántos elementos necesita.",
             title2: "Aquí puede agregar detalles adicionales y darle un color a la publicación.",
             sub1: "¿No ves algo en la lista? Puede ingresar otros elementos en la parte inferior. Haga clic en los botones más / menos en la parte inferior derecha para cambiar todas las cantidades de elementos necesarios.",
-            item: "Nombre del Árticulo"
+            item: "Nombre del Árticulo",
+            success: "¡Envio Exitoso!"
         },
         confirmation: {
             success: "¡Envio Exitoso!",
@@ -446,7 +450,9 @@ export class TranslatorProvider {
             openAlb: "Abrir Album",
             submit: "Enviar",
             show: "Mostrar nombre de usuario",
-            error: "Informe debe contener una descripción"
+            error: "Informe debe contener una descripción",
+            submitted: "¡Envio Exitoso!",
+            success: "¡Borrado Exitosamente!"
         },
         home: {
             view: "Ver el Mapa",

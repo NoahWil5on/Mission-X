@@ -72,7 +72,7 @@ export class EditViewComponent {
         this.infoComponent.editComponent = this;
         this.data = JSON.parse(JSON.stringify(this.userInfo.activeData));
     }
-    dismiss(bool) {
+    dismiss() {
         this.navCtrl.setRoot(MapPage);
     }
     statusClick() {
@@ -85,21 +85,6 @@ export class EditViewComponent {
         this.click.click('editPostDescription');
     }
     submit() {
-        // if (this.data.checks[0].text.length < 1) return;
-        // var temp = this.data.checks
-        // for (var i = 0; i < temp.length; i++) {
-        //     if (!temp[i] || !temp[i].text || temp[i].text == "" || !temp[i].amount || temp[i].amount < 1) {
-        //         temp.splice(i, 1);
-        //         i--;
-        //         continue;
-        //     }
-        //     temp[i].text = temp[i].text.trim();
-        //     if (temp[i].text.length < 1) {
-        //         temp.splice(i, 1);
-        //         i--;
-        //     }
-        // }
-        // if (temp.length < 1) return;
         for(var i = 0; i < this.data.checks.length; i++){
             this.data.checks[i].text = this.data.checks[i].text.trim();
             if(this.data.checks[i].amount > 999){
@@ -111,13 +96,17 @@ export class EditViewComponent {
             if(this.data.checks[i].text.length < 1 || !this.data.checks[i].amount || this.data.checks[i].amount < 1){
               this.data.checks.splice(i,1);
               i--;
-              console.log("Something should be happening");
             }
         }
         if(this.data.checks.length < 1) return;
         firebase.database().ref('/positions/').child(this.data.key).set(this.data).then(_ => {
             this.userInfo.activeData = this.data;
-            this.dismiss(true);
+            var myAlert = this.alertCtrl.create({
+                title: this.translate.text.edit.submitted,
+                buttons: ['OK']
+            })
+            myAlert.present();
+            this.dismiss();
         });
     }
     delete() {
@@ -200,7 +189,12 @@ export class EditViewComponent {
                 }).then(_ => {
                     //delete root report
                     firebase.database().ref('/positions/').child(this.data.key).remove().then(() => {
-                        this.dismiss(true);
+                        var myAlert = this.alertCtrl.create({
+                            title: this.translate.text.edit.success,
+                            buttons: ['OK']
+                        })
+                        myAlert.present();
+                        this.dismiss();
                     });
                 });
             });

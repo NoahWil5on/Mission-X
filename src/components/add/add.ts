@@ -143,6 +143,11 @@ export class AddComponent {
       loader: loader,
     });
     loader.onDidDismiss(() => {
+      var myAlert = this.alertCtrl.create({
+        title: this.translate.text.add.success,
+        buttons: ['OK']
+      })
+      myAlert.present();
       this.mapPage.navCtrl.setRoot(MapPage);
     })
   }

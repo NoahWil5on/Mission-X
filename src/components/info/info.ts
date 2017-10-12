@@ -114,6 +114,11 @@ export class InfoComponent {
   }
   updateChecks(){
     firebase.database().ref(`/positions/${this.myData.key}/checks`).set(this.myData.checks).then(_ => {
+      var myAlert = this.alertCtrl.create({
+        title: this.translate.text.infoWindow.submitted,
+        buttons: ['OK']
+      })
+      myAlert.present();
       this.navCtrl.setRoot(MapPage);
     });
   }
