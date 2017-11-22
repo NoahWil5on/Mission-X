@@ -25,6 +25,7 @@ export class UserInfoProvider {
     activeData: any;
     isMobile: boolean = false;
     openInfo: boolean = false;
+    notificationCount: any = -1;
 
     constructor(public toastCtrl: ToastController, public afAuth: AngularFireAuth) {
         this.isApp = !document.URL.startsWith('http');

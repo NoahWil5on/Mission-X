@@ -181,19 +181,10 @@ constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
     }
     //open side nav
     openMenu(){
-        var self = this;
         if(this.checkLogin()){
             firebase.database().ref('users').child(this.afAuth.auth.currentUser.uid).once('value').then((snapshot) => {
                 this.name = snapshot.val().name;
                 this.imgSrc = snapshot.val().url;
-            });
-            firebase.database().ref(`/notifications/${this.afAuth.auth.currentUser.uid}`).once('value', snapshot => {
-                if(snapshot.hasChild('count')){
-                    self.notificationCount = snapshot.val().count;
-                }
-                else{
-                    self.notificationCount = 0;
-                }
             });
         }
     }

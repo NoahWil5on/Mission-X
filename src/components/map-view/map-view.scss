@@ -48,6 +48,17 @@
         .greenButton{
             color: limegreen;
         }
+        .count{
+            position: absolute;
+            top: 0;
+            transform: translate(-50% ,0);
+            right: -10px;
+            padding: 5px;
+            background-color: #ef2d56;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+        }
         #drop-down{
             color: white;
             top: 0;

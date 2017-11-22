@@ -9,6 +9,8 @@
         </ion-checkbox>
         <p (click)="check.state = !check.state;" text-wrap>{{check.amount}} {{check.text}}</p>
     </div>
+    <button ion-button class="subscribe" (click)="subscribe(true)" *ngIf="!subbed">subscribe</button>
+    <button ion-button class="subscribe" (click)="subscribe(false)" *ngIf="subbed">unsubscribe</button>
     <!-- <ion-grid no-padding *ngIf="myData.url" id="image-grid">
         <ion-row>
             <ion-col no-padding>

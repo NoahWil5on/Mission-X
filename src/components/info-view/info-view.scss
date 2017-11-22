@@ -35,6 +35,7 @@
         }
         #main-content{
             overflow: scroll;
+            padding-bottom: 20px;
         }
         .row{
             display: flex;
@@ -90,6 +91,21 @@
                 left: 50%;
                 transform: translate(-50%,-50%);
             }
+        }
+        .subscribe{
+            margin-top: 10px;
+            color: black;
+            background-color: #eee;
+            border-radius: 4px;
+            height: 1.4em;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            padding: 6px;
+        }
+        .subscribe:active{
+            background-color: #ccc;
         }
         #buttons-grid{
             ion-row{

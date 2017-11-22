@@ -41,6 +41,7 @@ export class NotificationsPage {
           })
         }).then(_ => {
           self.notes.sort(function(a, b){ return b.time-a.time });
+          self.userInfo.notificationCount = 0;
         })
       })
     })

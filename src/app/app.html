@@ -32,14 +32,14 @@
                 {{translate.text.menu.map}}
             </button>
         </div>
-        <!-- <div class="background">
+        <div class="background">
             <button class="menu-button" (click)="notifications()" [class.nav-item]="checkPage('notifications')">
                 Notifications
             </button>
-            <div class="notification" *ngIf="notificationCount != 0">
-                <p>{{notificationCount}}</p>
+            <div class="notification" *ngIf="userInfo.notificationCount > 0">
+                <p>{{userInfo.notificationCount}}</p>
             </div>
-        </div> -->
+        </div>
         <div class="background">
             <button class="menu-button" (click)="reports()" [class.nav-item]="checkPage('reports')">
                 {{translate.text.menu.reports}}

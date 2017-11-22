@@ -102,7 +102,7 @@ export class EditViewComponent {
         firebase.database().ref('/positions/').child(this.data.key).set(this.data).then(_ => {
             this.userInfo.activeData = this.data;
             var myAlert = this.alertCtrl.create({
-                title: this.translate.text.edit.submitted,
+                title: this.translate.text.editPost.submitted,
                 buttons: ['OK']
             })
             myAlert.present();
@@ -169,35 +169,14 @@ export class EditViewComponent {
     }
     //helper function for deleteDatat()
     deleteReport() {
-        this.click.click('infoWindowDelete');
-        var self = this;
-        //delete each "resolve" image from db
-        firebase.database().ref('/resolves/').child(this.data.key).once('value').then(snapshot => {
-            //loop through resolve images and delete them from storage
-            snapshot.forEach(function (item) {
-                firebase.storage().ref('/images/').child("resolves").child(item.val().refName).delete();
-            });
-        }).then(() => {
-            //delete the directory for resolve on this report
-            firebase.database().ref('/resolves/').child(this.data.key).remove().then(() => {
-                firebase.database().ref('/messages/').child(this.data.key).remove();
-            }).then(() => {
-                //update post #
-                var userRating = firebase.database().ref('/userRating/').child(self.afAuth.auth.currentUser.uid)
-                userRating.once('value', snap => {
-                    userRating.child('posts').set(snap.val().posts - 1);
-                }).then(_ => {
-                    //delete root report
-                    firebase.database().ref('/positions/').child(this.data.key).remove().then(() => {
-                        var myAlert = this.alertCtrl.create({
-                            title: this.translate.text.edit.success,
-                            buttons: ['OK']
-                        })
-                        myAlert.present();
-                        this.dismiss();
-                    });
-                });
-            });
-        })
+        //delete root report
+        firebase.database().ref('/positions/').child(this.data.key).remove().then(() => {
+            var myAlert = this.alertCtrl.create({
+                title: this.translate.text.edit.success,
+                buttons: ['OK']
+            })
+            myAlert.present();
+            this.dismiss();
+        });
     }
 }

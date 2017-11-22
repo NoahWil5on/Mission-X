@@ -16,6 +16,7 @@ import { InfoComponent } from '../info/info';
 
 //firebase imports
 import * as firebase from 'firebase';
+import {AngularFireAuth} from 'angularfire2/auth';
 
 @Component({
   selector: 'info-view',
@@ -31,10 +32,12 @@ export class InfoViewComponent {
   messages: any = [];
   id: any;
   type: string = 'assets/images/icons/cyan.png';
+  subbing: boolean = false;
+  subbed: boolean = false;
 
   status: string = "";
 
-  constructor(public userInfo: UserInfoProvider, public likeProvider: LikeProvider, public ngZone: NgZone, public click: ClickProvider, public imageViewerCtrl: ImageViewerController, public translate: TranslatorProvider, public info: InfoComponent, public events: Events) {
+  constructor(public userInfo: UserInfoProvider, public likeProvider: LikeProvider, public ngZone: NgZone, public click: ClickProvider, public imageViewerCtrl: ImageViewerController, public translate: TranslatorProvider, public info: InfoComponent, public events: Events, public afAuth: AngularFireAuth) {
     this.myData = this.info.myData;
     this.checks = this.myData.checks;
     this.likeable();
@@ -81,6 +84,13 @@ export class InfoViewComponent {
         if (snapshots.hasOwnProperty(snap)) continue;
         self.messages.unshift(snapshots.val()[snap]);
       }
+    });
+    firebase.database().ref(`subscriptions/${this.myData.key}`).once('value').then(snapshot => {
+      snapshot.forEach((item) => {
+        if(item.val() == this.afAuth.auth.currentUser.uid){
+          this.subbed = true;
+        }
+      });
     });
   }
   ngAfterViewInit() {
@@ -162,5 +172,30 @@ export class InfoViewComponent {
       return true;
     }
     return false;
+  }
+  subscribe(bool){
+    if(this.subbing) return;
+    this.subbing = true;
+    firebase.database().ref(`subscriptions/${this.myData.key}`).once('value').then(snapshot => {
+      var found = false;
+      var myItem;
+      snapshot.forEach((item) => {
+        if(item.val() == this.afAuth.auth.currentUser.uid){
+          found = true;
+          myItem = item;
+        }
+      });
+      if(!found && bool){
+        firebase.database().ref(`subscriptions/${this.myData.key}`).push(this.afAuth.auth.currentUser.uid).then(_ => {
+          this.subbed = true;
+          this.subbing = false;
+        });
+      }else if(!bool && myItem){
+        firebase.database().ref(`subscriptions/${this.myData.key}/${myItem.key}`).remove().then(_ => {
+          this.subbed = this.subbing = false;
+        });
+      }
+    });
+    
   }
 }
